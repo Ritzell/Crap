@@ -1,0 +1,6 @@
+function Start () {
+　// マウスカーソルを削除する
+　Screen.showCursor = false;
+  // マウスカーソルを画面内にロックする
+  Screen.lockCursor = true;
+  }
