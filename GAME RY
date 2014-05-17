@@ -1,0 +1,206 @@
+  import ddf.minim.*;
+  Minim minim;
+  AudioPlayer player_sound;
+
+  int x =12;
+  int y = 100;
+  int move = 2;
+  
+
+  float vx = 3;
+
+  
+  PImage img;
+  PImage player;
+  
+  int live1;           
+  int live2;           
+  int live3;           
+  int live4;           
+  int live5;           
+  
+  
+void setup() {
+  
+  minim = new Minim(this); //初 期 化
+  player_sound = minim.loadFile("1588.mp3");
+  player_sound.play(); //再 生
+  player_sound.loop();
+  
+  vx = 3;
+  
+  live1 = 0;           //  等速ボールの動作中フラグ
+  live2 = 0;           //  減速ボールの動作中フラグ
+  live3 = 0;           //  加速ボールの動作中フラグ
+  live4 = 0;           //  加速ボールの動作中フラグ
+  live5 = 0;           //  加速ボールの動作中フラグ
+  
+  size(640,450);
+  
+  img = loadImage("111.jpg");
+  player = loadImage("player.png");
+  player();
+
+  frameRate(120);
+  
+  smooth(); 
+  
+}
+
+
+void draw() {
+  
+  background(0);
+  
+  image (img, 0, 0, 640, 340);
+  
+  enemy();
+  object();
+  player();
+  keyPressed();
+  keyReleased();
+}
+
+void object()
+{
+  fill(255);
+  rect(0, 330, 640, 800);
+  rect(0, 70, 60, -73);
+  /*rect(150, 150, 60, -150);
+  rect(150, 370, 60, -150);
+  rect(270, 250, 180, -150);
+  rect(270, 440,180,-150);
+  rect(270, 60, 180, -150);
+  rect(490, 370, 60, -150);
+  rect(490, 370, 60, -150);
+  rect(490, 100, 60, -150);*/
+}
+
+void enemy()
+{
+
+    fill(100);
+    rect(400, 310, 30, 40);
+ 
+}
+
+void player()
+{ 
+
+  image (player, x, y, 20, 20);
+  y += 7;//重力
+    if( y > height ){
+      y = 0;
+    }
+    if( y < 0 ){
+      y = 340;
+    }
+    if( x < 0 ){
+      x = 4;
+    }
+
+}
+void keyPressed(){
+ 
+  
+     if( key == 'f'){
+       
+       live1 = 1;
+       
+     if( live1 == 1){
+       vx = move;
+       x += vx;
+     }
+     }
+       
+     if( key == 's'){
+       
+       live1 = 2;
+       
+     if(live1 == 2){
+       vx = move;
+       x -= vx;
+     }
+     }
+  
+      if(key == 'g'){     
+       live1 = 5;           
+      
+      if(live1 == 5){      
+       vx += 0.2;     
+       x += vx;                
+      
+     
+      if(vx > 6){             
+       live1 = 6;
+      
+      if(live1 == 6){
+        vx = 6;
+        x += vx;
+      }
+      }
+      }
+     }
+
+
+
+
+       if(key == 'a'){
+       
+         live1 = 7;
+       
+       if(live1 == 6){
+         vx -= 0.2;
+         x += vx;
+   
+       if(vx < -6){
+         live1 = 8;
+         
+       if(live1 == 8){
+         vx = -7;
+         x += vx;
+       }
+       }
+       }
+     }
+     }
+
+
+void keyReleased()
+{
+/ if(key == 'g'){
+          live1 = 0;
+        if( live1 == 0){
+          live2 = 1;
+        if(live2 == 1){
+          vx -= 0.25;
+        if(vx < 0){
+          live2 = 0;
+          vx = 0;
+       }
+       }
+  }
+  }
+  if(key == 'a'){
+          live1 = 0;
+         if( live1 == 0){
+           live3 = 1;
+         if(live3 == 1){
+           vx += 0.25;
+         if( vx > 0){
+           live2 = 0;
+           vx = 0;
+         }
+         }
+         }
+}
+}
+         
+      
+void stop()
+{
+  player_sound.close();
+  minim.stop();
+  super.stop();
+}
+    
