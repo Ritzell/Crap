@@ -17,7 +17,7 @@ int live2;
 int live3;
 //必要になり次第フラグを追加する
 
-Ball b1;
+Player b1;
   
   
 void setup()
@@ -46,7 +46,7 @@ void setup()
     smooth();
     //オブジェクトにアンチエイリアスをつけている
     
-    b1 = new Ball(30,250,200);
+    b1 = new Player(30,250,100);
 }
 
 
@@ -214,18 +214,19 @@ void tutorial()
    }
 
 
-class Ball
+class Player
 {
   int x11,y11,size11;
   
-Ball(int x,int y,int size){
+Player(int x1,int y1,int size1){
   x11 = 30;
   y11 = 200;
-  size11 = 30;
+  size11 = 20;
 }
   void update()
   {
     ellipse(x11,y11,size11,size11);
+    keyPressed();
   }
 }
 
